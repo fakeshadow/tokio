@@ -204,6 +204,11 @@ impl UnixStream {
         self.io.registration().poll_read_ready(cx).map_ok(|_| ())
     }
 
+    /// placeholder doc
+    pub fn poll_ready(&self, cx: &mut Context<'_>) -> Poll<io::Result<Ready>> {
+        self.io.registration().poll_read_ready(cx).map_ok(|event| event.ready)
+    }
+
     /// Try to read data from the stream into the provided buffer, returning how
     /// many bytes were read.
     ///
